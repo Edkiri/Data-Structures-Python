@@ -18,10 +18,10 @@ class SinglyLinkedList:
             self.head = node
             self.tail = node
         else:
-            current = self.head
-            while current.next:
-                current = current.next
-            current.next = node
+            probe = self.head
+            while probe.next:
+                probe = probe.next
+            probe.next = node
             self.tail = node
 
         self.size += 1
@@ -34,16 +34,16 @@ class SinglyLinkedList:
     def iter(self):
         """ Iterates through each of the node values in the list. """
 
-        current = self.head
-        while current:
-            val = current.data
-            current = current.next
+        probe = self.head
+        while probe:
+            val = probe.data
+            probe = probe.next
             yield val
 
             
     def search(self, data):
         """ Ensures that 'data' is on the list or not. """
-        
+
         for node in self.iter():
             if data == node:
                 print(f"Data {data} has been found!!")
@@ -68,16 +68,44 @@ class SinglyLinkedList:
             if self.head == None:
                 self.head = node
             else:
-                current = self.head
-                while current.next:
-                    current = current.next
-                current.next = node
+                probe = self.head
+                while probe.next:
+                    probe = probe.next
+                probe.next = node
                 
             self.size += 1
+
+    def replace(self, target_item, new_data):
+        """ 
+        Replaces the node with the value "target_item" with 
+        a new node with a value of "new_data". 
+        """
+        new_node = Node(new_data)
+
+        probe = self.head
+        previus = self.head
+        counter = 0
+        while probe.next != None and probe.data != target_item:
+            probe = probe.next
+            if counter > 0:
+                previus = previus.next
+            counter += 1
+        if probe.data == target_item and probe == self.head:
+            new_node.next = probe.next
+            self.head = new_node
+        elif probe.data == target_item:
+            new_node.next = probe.next
+            previus.next = new_node
+        else:
+            print("The target item is not in the list.")
+            
 
 
 if __name__ == '__main__':
 
     linked_list = SinglyLinkedList()
-    for i in range(1,6):
+    for i in range(1,5):
         linked_list.append(i)
+
+    for el in linked_list.iter():
+        print(el)
