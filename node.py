@@ -6,4 +6,4 @@ class Node:
         self.next = next
 
     def __str__(self):
-        return f"{self.data} > {str(self.next)}"
+        return f"data : {self.data} > {str(self.next)}"
