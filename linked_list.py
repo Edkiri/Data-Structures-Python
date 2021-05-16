@@ -2,20 +2,23 @@ from node import Node
 from arrays import Array
 
 class SinglyLinkedList:
+
     def __init__(self):
+        """ initializes a empty list. """
+
         self.head = None
         self.tail = None
         self.size = 0
 
     def append(self, data):
-        node = Node(data)
+        """ Add a node into de LinkedList with the data. """
 
+        node = Node(data)
         if self.head == None:
             self.head = node
             self.tail = node
         else:
             current = self.head
-
             while current.next:
                 current = current.next
             current.next = node
@@ -25,9 +28,12 @@ class SinglyLinkedList:
 
     
     def size(self):
+        """ Returns the size of the list. """
         return str(self.size)
 
     def iter(self):
+        """ Iterates through each of the node values in the list. """
+
         current = self.head
         while current:
             val = current.data
@@ -36,21 +42,26 @@ class SinglyLinkedList:
 
             
     def search(self, data):
+        """ Ensures that 'data' is on the list or not. """
+        
         for node in self.iter():
             if data == node:
-                print(f"Data {data} found!!")
+                print(f"Data {data} has been found!!")
+            else:
+                print(f"Data {data} has not been found.")
+
 
     
     def clear(self):
+        """ Empty the list. """
+
         self.head = None
         self.size = 0
 
     
     def add_array(self, array):
-        """
-        Append the elemets of an 'array'
-        into the SinglyLinkedList instance as Nodes.
-        """
+        """Append the elemets of an Array into the list  as Nodes."""
+
         for element in array:
             node = Node(element)
 
